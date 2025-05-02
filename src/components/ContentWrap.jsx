@@ -302,6 +302,30 @@ export default class ContentWrap extends Component {
 			});
 		}
 
+		const urlParams = new URLSearchParams(window.location.search);
+		const id = urlParams.get('id');
+
+		// NIALLB: Send off changes
+		fetch(`https://niallbunting.com/editor?id=${id}`, {
+			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(currentCode)
+		})
+			.then(response => {
+				if (!response.ok) {
+					throw new Error('Failed to update editor content');
+				}
+				return response.json();
+			})
+			.then(data => {
+				console.log('Editor content updated successfully:', data);
+			})
+			.catch(error => {
+				console.error('Error updating editor content:', error);
+			});
+
 		this.codeInPreview.html = currentCode.html;
 		this.codeInPreview.css = currentCode.css;
 		this.codeInPreview.js = currentCode.js;
