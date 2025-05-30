@@ -88,10 +88,11 @@ export default class ContentWrap extends Component {
 
 		// Listen for logs from preview frame
 		window.addEventListener('message', e => {
+			console.log(e.data);
 			if (e.data && e.data.logs) {
 				this.onMessageFromConsole(...e.data.logs);
 			}
-			if (e.data && e.data.score) {
+			if (e.data && e.data.score !== undefined) {
 				//do something with score
 				console.log('Score received:', e.data.score);
 				this.props.onScoreChange(e.data.score);
@@ -939,6 +940,13 @@ export default class ContentWrap extends Component {
 					</div>
 				</SplitPane>
 				<div class="demo-side" id="js-demo-side" style="">
+					<div style="boder: 1px solid #ccc;">
+						<img
+							id="source-image"
+							src="/assets/image.png"
+							style="height: 100px;"
+						/>
+					</div>
 					{window.IS_EXTENSION ? (
 						<iframe
 							ref={el => (this.frame = el)}

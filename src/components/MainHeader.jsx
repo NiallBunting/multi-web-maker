@@ -72,7 +72,8 @@ export function MainHeader({
 							<Trans>Save</Trans>
 						</button>
 						<div style="color: #fff;">
-							<strong>Score:</strong> {score ? `${score.toFixed(2)}%` : 'N/A'}
+							<strong>Score:</strong>{' '}
+							{score !== undefined ? `${score.toFixed(2)}%` : 'N/A'}
 						</div>
 						{/*<Button
 							onClick={assetsBtnHandler}
