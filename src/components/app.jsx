@@ -582,6 +582,10 @@ export default class App extends Component {
 		});
 	}
 
+	onScoreChange(score) {
+		this.setState({ score });
+	}
+
 	/**
 	 * Fetches all items from storage
 	 * @param  {boolean} shouldSaveGlobally Whether to store the fetched items in global arr for later use.
@@ -1752,6 +1756,7 @@ export default class App extends Component {
 							isFetchingItems={this.state.isFetchingItems}
 							isSaving={this.state.isSaving}
 							currentItem={this.state.currentItem}
+							score={this.state.score}
 							titleInputBlurHandler={this.titleInputBlurHandler.bind(this)}
 							user={this.state.user}
 							isAutoPreviewOn={this.state.prefs.autoPreview}
@@ -1782,6 +1787,7 @@ export default class App extends Component {
 							/>
 						) : (
 							<ContentWrap
+								onScoreChange={this.onScoreChange.bind(this)}
 								currentLayoutMode={this.state.currentLayoutMode}
 								currentItem={this.state.currentItem}
 								onCodeChange={this.onCodeChange.bind(this)}

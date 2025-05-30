@@ -17,6 +17,7 @@ export function MainHeader({
 	assetsBtnHandler,
 	isFileMode,
 	onItemFork,
+	score,
 	...props
 }) {
 	const isAutoPreviewOn =
@@ -53,7 +54,10 @@ export function MainHeader({
 								<Trans>Run</Trans>
 							</button>
 						)}
-						<Button
+						<div style="color: #fff;">
+							<strong>Score:</strong> {score ? `${score.toFixed(2)}%` : 'N/A'}
+						</div>
+						{/*<Button
 							onClick={assetsBtnHandler}
 							data-event-category="ui"
 							data-event-action="addLibraryButtonClick"
@@ -192,6 +196,7 @@ export function MainHeader({
 								</HStack>
 							</Button>
 						)}
+							*/}
 					</div>
 				</div>
 			)}

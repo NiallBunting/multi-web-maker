@@ -64,6 +64,7 @@ export default class ContentWrap extends Component {
 		this.toggleConsole = this.toggleConsole.bind(this);
 		this.evalConsoleExpr = this.evalConsoleExpr.bind(this);
 	}
+
 	shouldComponentUpdate(nextProps, nextState) {
 		return (
 			this.state.isConsoleOpen !== nextState.isConsoleOpen ||
@@ -89,6 +90,11 @@ export default class ContentWrap extends Component {
 		window.addEventListener('message', e => {
 			if (e.data && e.data.logs) {
 				this.onMessageFromConsole(...e.data.logs);
+			}
+			if (e.data && e.data.score) {
+				//do something with score
+				console.log('Score received:', e.data.score);
+				this.props.onScoreChange(e.data.score);
 			}
 		});
 	}

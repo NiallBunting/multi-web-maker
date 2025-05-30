@@ -5,7 +5,7 @@
 		margin: 0;
 		padding: 0;
 	}
-	#demo-frame {
+	#frame {
 		border: 0;
 		width: 100%;
 		background: white;
@@ -24,20 +24,6 @@
 		height: 512px;
 		width: 512px;
 	}
-	#score-holder {
-		height: 50px;
-		width: 50px;
-		overflow: hidden;
-		position: absolute;
-		top: 10px;
-		right: 10px;
-		background-color: yellow;
-		border-radius: 50%;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		text-align: center;
-	}
 </style>
 
 <img id="source-image" src="./image.png" style="display: none;"/>
@@ -45,11 +31,9 @@
 <body onmouseenter="onHover()" onmousemove="onMove()">
 
 	<div id="image-holder" class="holder holder-size">
-		<canvas id="image-canvas" class="holder-size"></canvas>
+		<canvas id="image-canvas" class="holder-size" width="512px" height="512px"></canvas>
 	</div>
 	<div id="canvas-holder" class="holder holder-size"></div>
-	<div id="score-holder">100%</div>
-
 
 	<iframe src="" frameborder="0" id="frame" allowfullscreen></iframe>
 

@@ -1,3 +1,13 @@
+function sendMessageToWindow(message) {
+	if (window.opener) {
+		window.opener.postMessage(message, '*');
+	} else if (window.parent) {
+		window.parent.postMessage(message, '*');
+	} else {
+		console.warn('No parent or opener window to send the message to.');
+	}
+}
+
 window.addEventListener('message', e => {
 	// Recieving from app window
 	if (e.data && e.data.contents && e.data.contents.match(/<html/)) {
@@ -17,8 +27,6 @@ window.addEventListener('message', e => {
 	if (e.data && e.data.logs) {
 		(window.opener || window.top).postMessage(e.data, '*');
 	}
-
-	console.log(html2canvas);
 });
 
 function onHover() {
@@ -89,14 +97,17 @@ function onHover() {
 			);
 			const percentDiff =
 				(1 - differentPixels / (canvas1.width * canvas1.height)) * 100;
-			document.getElementById('score-holder').innerHTML =
-				`${percentDiff.toFixed(2)} %`;
+
+			sendMessageToWindow({
+				type: 'score',
+				score: percentDiff
+			});
 		});
 	}
 }
 
 function onMove() {
-	let canvas = document.querySelector('#html-canvas');
+	let canvas = document.getElementById('html-canvas');
 	let body = document.querySelector('body');
 
 	body.addEventListener('mousemove', function (e) {
