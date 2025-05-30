@@ -3,22 +3,43 @@
 <style>
 	body {
 		margin: 0;
+		padding: 0;
 	}
-	#demo-frame {
+	#frame {
 		border: 0;
 		width: 100%;
 		background: white;
 		height: 100%;
 	}
+	#image-holder {
+	}
+	#canvas-holder {
+	}
+	.holder {
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+	.holder-size {
+		height: 512px;
+		width: 512px;
+	}
 </style>
 
-<body onmouseenter="onHover()">
-	<iframe
-		src="about://blank"
-		frameborder="0"
-		id="demo-frame"
-		allowfullscreen
-	></iframe>
+<img id="source-image" src="./image.png" style="display: none" />
+
+<body onmouseenter="onHover()" onmousemove="onMove()">
+	<div id="image-holder" class="holder holder-size">
+		<canvas
+			id="image-canvas"
+			class="holder-size"
+			width="512px"
+			height="512px"
+		></canvas>
+	</div>
+	<div id="canvas-holder" class="holder holder-size"></div>
+
+	<iframe src="" frameborder="0" id="frame" allowfullscreen></iframe>
 
 	<script src="detached-window.js"></script>
 </body>

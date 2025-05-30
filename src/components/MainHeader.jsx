@@ -54,6 +54,23 @@ export function MainHeader({
 								<Trans>Run</Trans>
 							</button>
 						)}
+						<button
+							id="saveBtn"
+							class={`btn btn--dark hint--rounded hint--bottom-left ${
+								props.isSaving ? 'is-loading' : ''
+							} ${props.unsavedEditCount ? 'is-marked' : 0}`}
+							aria-label={i18n._(t`Save current creation (Ctrl/⌘ + S)`)}
+							onClick={props.saveBtnHandler}
+							style="margin-right: 20px;"
+						>
+							<svg viewBox="0 0 24 24">
+								<path d="M15,9H5V5H15M12,19A3,3 0 0,1 9,16A3,3 0 0,1 12,13A3,3 0 0,1 15,16A3,3 0 0,1 12,19M17,3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V7L17,3Z" />
+							</svg>
+							<svg class="btn-loader" width="15" height="15" stroke="#fff">
+								<use xlinkHref="#loader-icon" />
+							</svg>
+							<Trans>Save</Trans>
+						</button>
 						<div style="color: #fff;">
 							<strong>Score:</strong> {score ? `${score.toFixed(2)}%` : 'N/A'}
 						</div>
@@ -134,22 +151,7 @@ export function MainHeader({
 						</button>
 
 						{!isNotMine && (
-							<button
-								id="saveBtn"
-								class={`btn btn--dark hint--rounded hint--bottom-left ${
-									props.isSaving ? 'is-loading' : ''
-								} ${props.unsavedEditCount ? 'is-marked' : 0}`}
-								aria-label={i18n._(t`Save current creation (Ctrl/⌘ + S)`)}
-								onClick={props.saveBtnHandler}
-							>
-								<svg viewBox="0 0 24 24">
-									<path d="M15,9H5V5H15M12,19A3,3 0 0,1 9,16A3,3 0 0,1 12,13A3,3 0 0,1 15,16A3,3 0 0,1 12,19M17,3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V7L17,3Z" />
-								</svg>
-								<svg class="btn-loader" width="15" height="15" stroke="#fff">
-									<use xlinkHref="#loader-icon" />
-								</svg>
-								<Trans>Save</Trans>
-							</button>
+
 						)}
 						<button
 							id="openItemsBtn"

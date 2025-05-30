@@ -99,7 +99,6 @@ function onHover() {
 				(1 - differentPixels / (canvas1.width * canvas1.height)) * 100;
 
 			sendMessageToWindow({
-				type: 'score',
 				score: percentDiff
 			});
 		});
@@ -113,10 +112,15 @@ function onMove() {
 	body.addEventListener('mousemove', function (e) {
 		const rect = canvas.getBoundingClientRect();
 		const x = e.clientX - rect.left;
-		const percent = (x / rect.width) * 100;
+		const percent = Math.max((x / rect.width) * 100, 0);
 
-		if (percent > 1 && percent <= 100) {
-			canvas.style.clipPath = `inset(0 ${100 - percent}% 0 0)`;
+		const maxPercent = Math.min(percent, 100);
+		canvas.style.clipPath = `inset(0 ${100 - maxPercent}% 0 0)`;
+
+		if (percent >= 100) {
+			canvas.style.opacity = '0.5';
+		} else {
+			canvas.style.opacity = '1';
 		}
 	});
 }

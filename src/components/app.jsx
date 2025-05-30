@@ -78,6 +78,7 @@ import { VStack } from './Stack.jsx';
 import { ProBadge } from './ProBadge.jsx';
 import { Text } from './Text.jsx';
 import { ProOnAppModal } from './ProOnAppModal.js';
+import { v4 as uuidv4 } from 'uuid';
 
 if (module.hot) {
 	require('preact/debug');
@@ -644,6 +645,27 @@ export default class App extends Component {
 	}
 
 	componentDidMount() {
+		const queryParams = new URLSearchParams(window.location.search);
+
+		const itemId = queryParams.get('id');
+		if (itemId) {
+			console.log(`Query parameter 'id' is set to: ${itemId}`);
+			// You can add additional logic here to handle the 'id' parameter
+		} else {
+			// Prompt the user to enter a name
+			let userName = prompt('Please enter your name:');
+			userName = userName.replace(/[^a-zA-Z0-9]/g, '');
+			const uuid = uuidv4();
+
+			if (userName && userName.length > 0) {
+				queryParams.set('id', userName + '-' + uuid);
+				window.history.replaceState(null, null, `?${queryParams.toString()}`);
+				console.log(`Query parameter 'name' is set to: ${userName}`);
+			} else {
+				window.location.reload();
+			}
+		}
+
 		function setBodySize() {
 			document.body.style.height = `${window.innerHeight}px`;
 		}
