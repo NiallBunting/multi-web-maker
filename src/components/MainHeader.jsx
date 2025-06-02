@@ -18,6 +18,7 @@ export function MainHeader({
 	isFileMode,
 	onItemFork,
 	score,
+	title,
 	...props
 }) {
 	const isAutoPreviewOn =
@@ -38,8 +39,9 @@ export function MainHeader({
 						id="titleInput"
 						title="Click to edit"
 						class="item-title-input"
-						value={currentItem.title}
+						value={title}
 						onBlur={titleInputBlurHandler}
+						disabled={1}
 					/>
 					<div class="main-header__btn-wrap  flex  flex-v-center">
 						{!isAutoPreviewOn && (

@@ -1,19 +1,21 @@
 window.addEventListener('message', e => {
+	console.log('Message received in detached window', e.data);
 	// Recieving from app window
 	if (e.data && e.data.contents && e.data.contents.match(/<html/)) {
 		const frame = document.querySelector('iframe');
 		frame.src = frame.src;
+
 		setTimeout(() => {
 			frame.contentDocument.open();
 			frame.contentDocument.write(e.data.contents);
 			frame.contentDocument.close();
 
-			updateIframe();
+			updateIframe(e.data.id);
 		}, 10);
 	}
 	if (e.data && e.data.url && e.data.url.match(/index\.html/)) {
 		document.querySelector('iframe').src = e.data.url;
-		updateIframe();
+		updateIframe(e.data.id);
 	}
 
 	// Recieving from preview iframe
@@ -28,7 +30,7 @@ function onHover() {
 	});
 }
 
-function updateIframe() {
+function updateIframe(id) {
 	let iframe = document.querySelector('iframe');
 
 	if (iframe.style.display !== 'none') {
@@ -45,13 +47,13 @@ function updateIframe() {
 			document.getElementById('canvas-holder').innerHTML = ''; // Clear previous canvas if any
 			document.getElementById('canvas-holder').appendChild(canvas);
 
-			calculateScore();
+			calculateScore(id);
 		});
 	}
 	return Promise.resolve();
 }
 
-function calculateScore() {
+function calculateScore(id) {
 	// Draw the image to canvas
 	const img = document.getElementById('source-image');
 	const canvas2 = document.getElementById('image-canvas');
@@ -93,7 +95,10 @@ function calculateScore() {
 		(1 - differentPixels / (canvas1.width * canvas1.height)) * 100;
 
 	console.log('Score: ', percentDiff);
-	(window.opener || window.top).postMessage({ score: percentDiff }, '*');
+	(window.opener || window.top).postMessage(
+		{ score: percentDiff, id: id },
+		'*'
+	);
 }
 
 function onMove() {

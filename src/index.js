@@ -8,10 +8,12 @@ import './lib/codemirror/addon/dialog/dialog.css';
 import './lib/hint.min.css';
 import './lib/inlet.css';
 import './style.css';
+import ViewerApp from './components/viewerapp.jsx';
 
 export default function () {
 	return (
 		<Router>
+			<ViewerApp path="/viewer" />
 			<App path="/" />
 			<App path="/create/:itemId" />
 			<App path="/app/create/:itemId" />

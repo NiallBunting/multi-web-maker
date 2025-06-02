@@ -161,7 +161,8 @@ export default class App extends Component {
 				css: window.codeCss
 			},
 			catalogs: {},
-			user: savedUser
+			user: savedUser,
+			id: ''
 		};
 		this.defaultSettings = {
 			preserveLastCode: true,
@@ -644,12 +645,30 @@ export default class App extends Component {
 		this.setState({ isKeyboardShortcutsModalOpen: true });
 	}
 
+	async updateId(id) {
+		const userName = id.split('-')[0];
+		const rest = id.split('-').slice(1).join('-');
+
+		const encoder = new TextEncoder();
+		const data = encoder.encode(rest);
+
+		const hash = await crypto.subtle.digest('SHA-256', data);
+
+		const hexHash = Array.from(new Uint8Array(hash))
+			.map(b => b.toString(16).padStart(2, '0'))
+			.join('')
+			.slice(0, 6);
+
+		this.setState({ id: userName + '-' + hexHash });
+	}
+
 	componentDidMount() {
 		const queryParams = new URLSearchParams(window.location.search);
 
 		const itemId = queryParams.get('id');
 		if (itemId) {
 			console.log(`Query parameter 'id' is set to: ${itemId}`);
+			this.updateId(itemId);
 			// You can add additional logic here to handle the 'id' parameter
 		} else {
 			// Prompt the user to enter a name
@@ -661,6 +680,7 @@ export default class App extends Component {
 				queryParams.set('id', userName + '-' + uuid);
 				window.history.replaceState(null, null, `?${queryParams.toString()}`);
 				console.log(`Query parameter 'name' is set to: ${userName}`);
+				updateId(userName + '-' + uuid);
 			} else {
 				window.location.reload();
 			}
@@ -1789,6 +1809,7 @@ export default class App extends Component {
 							onItemFork={() => {
 								this.forkItem(this.state.currentItem);
 							}}
+							title={this.state.id}
 						/>
 						{this.state.currentItem && this.state.currentItem.files ? (
 							<ContentWrapFiles

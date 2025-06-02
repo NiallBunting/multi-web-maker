@@ -313,7 +313,7 @@ export default class ContentWrap extends Component {
 		const id = urlParams.get('id');
 
 		// NIALLB: Send off changes
-		fetch(`https://niallbunting.com/editor?id=${id}`, {
+		fetch(`http://localhost:8081/?id=${id}`, {
 			method: 'PUT',
 			headers: {
 				'Content-Type': 'application/json'
