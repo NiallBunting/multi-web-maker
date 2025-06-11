@@ -125,9 +125,23 @@ export default class ViewerApp extends Component {
 	}
 
 	updatePeople(data) {
+		const currentPoeple = this.state.people;
 		this.setState({ people: data });
 
 		data.forEach(person => {
+			let inCurrent = currentPoeple.find(p => p.id === person.id);
+			if (inCurrent && Math.random() > 0.1) {
+				person.score = inCurrent.score;
+
+				if (
+					inCurrent.html == person.html &&
+					inCurrent.css == person.css &&
+					inCurrent.js == person.js
+				) {
+					return;
+				}
+			}
+
 			const frame = document.getElementById('frame-' + person.id);
 
 			if (frame) {
