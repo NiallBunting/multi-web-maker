@@ -238,6 +238,12 @@ export default class ViewerApp extends Component {
 										<div>
 											Score: {person.score ? person.score.toFixed(2) : '--.--'}%
 										</div>
+										<div>
+											Chars:{' '}
+											{person.html.length +
+												person.css.length +
+												person.js.length}
+										</div>
 									</div>
 									<iframe
 										src="http://localhost:7888/preview.htm"
