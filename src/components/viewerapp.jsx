@@ -56,7 +56,8 @@ export default class ViewerApp extends Component {
 				html: '',
 				css: '',
 				js: ''
-			}
+			},
+			pass: prompt('Enter the password to access the viewer app:')
 		};
 	}
 
@@ -103,7 +104,7 @@ export default class ViewerApp extends Component {
 	}
 
 	loadPeople() {
-		fetch('http://localhost:8081/')
+		fetch(`http://localhost:8081/?id=${this.state.pass}`)
 			.then(response => response.json())
 			.then(data => {
 				this.updatePeople(data);
@@ -113,7 +114,7 @@ export default class ViewerApp extends Component {
 			});
 
 		setInterval(() => {
-			fetch('http://localhost:8081/')
+			fetch(`http://localhost:8081/?id=${this.state.pass}`)
 				.then(response => response.json())
 				.then(data => {
 					this.updatePeople(data);
