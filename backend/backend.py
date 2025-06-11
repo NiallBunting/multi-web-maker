@@ -87,6 +87,12 @@ def handle_put():
 @app.route('/', methods=['GET'])
 def handle_get():
 
+    #id = request.args.get('id')
+    #if not id:
+    #    abort(400, description="Missing 'id' query parameter")
+    #if id !== "sancss"
+    #    abort(401, description="Wrong id")
+
     current_time = datetime.datetime.now()
     result = []
     keys_to_delete = []
