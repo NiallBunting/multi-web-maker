@@ -19,6 +19,7 @@ export function MainHeader({
 	onItemFork,
 	score,
 	title,
+	chars,
 	...props
 }) {
 	const isAutoPreviewOn =
@@ -76,6 +77,10 @@ export function MainHeader({
 						<div style="color: #fff;">
 							<strong>Score:</strong>{' '}
 							{score !== undefined ? `${score.toFixed(2)}%` : 'N/A'}
+						</div>
+						&nbsp;&nbsp;
+						<div style="color: #fff;">
+							<strong>Chars:</strong> {chars !== undefined ? chars : 'N/A'}
 						</div>
 						{/*<Button
 							onClick={assetsBtnHandler}

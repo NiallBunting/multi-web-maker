@@ -584,8 +584,8 @@ export default class App extends Component {
 		});
 	}
 
-	onScoreChange(score) {
-		this.setState({ score });
+	onScoreChange(score, chars) {
+		this.setState({ score, chars });
 	}
 
 	/**
@@ -1799,6 +1799,7 @@ export default class App extends Component {
 							isSaving={this.state.isSaving}
 							currentItem={this.state.currentItem}
 							score={this.state.score}
+							chars={this.state.chars}
 							titleInputBlurHandler={this.titleInputBlurHandler.bind(this)}
 							user={this.state.user}
 							isAutoPreviewOn={this.state.prefs.autoPreview}

@@ -95,7 +95,12 @@ export default class ContentWrap extends Component {
 			if (e.data && e.data.score !== undefined) {
 				//do something with score
 				console.log('Score received:', e.data.score);
-				this.props.onScoreChange(e.data.score);
+				this.props.onScoreChange(
+					e.data.score,
+					this.codeInPreview.html.length +
+						this.codeInPreview.css.length +
+						this.codeInPreview.js.length
+				);
 			}
 		});
 	}

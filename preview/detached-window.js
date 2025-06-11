@@ -34,7 +34,20 @@ function updateIframe(id) {
 	let iframe = document.querySelector('iframe');
 
 	if (iframe.style.display !== 'none') {
-		return html2canvas(document.querySelector('iframe').contentDocument.body, {
+		return htmlToImage
+			.toCanvas(document.querySelector('iframe').contentDocument.body)
+			.then(function (canvas) {
+				// Append the canvas to the body or do something with it
+				canvas.id = 'html-canvas';
+				canvas.classList.add('holder-size');
+
+				document.getElementById('canvas-holder').innerHTML = ''; // Clear previous canvas if any
+				document.getElementById('canvas-holder').appendChild(canvas);
+
+				calculateScore(id);
+			});
+
+		/*return html2canvas(document.querySelector('iframe').contentDocument.body, {
 			x: 0,
 			y: 0,
 			width: 512,
@@ -48,7 +61,7 @@ function updateIframe(id) {
 			document.getElementById('canvas-holder').appendChild(canvas);
 
 			calculateScore(id);
-		});
+		});*/
 	}
 	return Promise.resolve();
 }
