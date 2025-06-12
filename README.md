@@ -2,6 +2,23 @@
 
 ---
 
+This is a multiplayer version of webmaker.
+
+Run both the frontend and the server. You may need to change the URLs.
+
+It's a bit hackly put together, so beware.
+
+To run:
+* Change urls to point to where you host it.
+* Update the preview so it is on a public port.
+* Update the matching image.
+
+Bugs:
+* The canvas is the wrong size so the scoring doesn't work with the Image2Html lib.
+
+
+---
+
 **Web-Maker** is an offline playground for your web experiments. Something like CodePen or JSFiddle, but much more faster and works offline because it runs completely on your system.
 
 ## [Open Web App](https://webmaker.app/create/) (Recommended: More features. More fun!)
